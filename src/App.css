@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.Main-Container {
+  display: flex;
+  width: 70%;
+  margin: 30px auto;
+  padding: 20px 40px;
+  justify-content: space-between;
+}
+.friend {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  position: relative;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+.friend:hover {
+  background-color: rgb(235, 235, 235);
+}
+.forButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+button {
+  background-color: black;
+  color: white;
+  padding: 10px 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.friend img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.friend .balance {
+  font-size: 14px;
+  margin-top: 6px;
+}
+.addFriendForm {
+  width: 360px;
+  background-color: rgb(241, 241, 241);
+  padding: 20px;
+  display: flex;
+  font-size: 20px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 10px;
+}
+.toLeft {
+  margin-left: 320px;
+}
+.addFriendForm input {
+  width: 200px;
+  padding: 6px;
+}
+.addFriendForm div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttn-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+}
+.SpliBIll {
+  width: 400px;
+  height: 300px;
+  background-color: rgb(241, 241, 241);
+  padding: 40px;
+  font-size: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.SpliBIll p {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.SpliBIll input {
+  padding: 6px;
+}
+.SpliBIll div {
+  display: flex;
+  margin: 10px;
+  justify-content: space-between;
+}
