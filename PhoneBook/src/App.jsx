@@ -9,28 +9,28 @@ const initialData = [
     id: 1,
   },
   {
-    name: "Jetha Lal C. Gada",
+    name: "Babita Ji 😘💖👌",
     number: "09876543212",
-    img: "https://st1.bollywoodlife.com/wp-content/uploads/2024/04/TMKOC-Jethalal-1.png",
+    img: "https://i.pinimg.com/736x/f8/e8/e7/f8e8e7628f576cb188490666d38da103.jpg",
+    id: 5,
+  },
+  {
+    name: "Atmaram T. Bhide",
+    number: "09876543212",
+    img: "https://static.toiimg.com/thumb/msid-91160476,width-400,resizemode-4/91160476.jpg",
     id: 2,
   },
   {
-    name: "Jetha Lal C. Gada",
+    name: "Roshan Singh Sodhi",
     number: "09876543212",
-    img: "https://st1.bollywoodlife.com/wp-content/uploads/2024/04/TMKOC-Jethalal-1.png",
+    img: "https://images.news18.com/webstories/uploads/2024/05/Taarak-Mehta-Ka-Ooltah-Chashmah-Sodhi-2024-05-9c4381b0aa607cf0a10c222c365a8bef.jpg",
     id: 3,
   },
   {
-    name: "Jetha Lal C. Gada",
+    name: "Mehta Sahab",
     number: "09876543212",
-    img: "https://st1.bollywoodlife.com/wp-content/uploads/2024/04/TMKOC-Jethalal-1.png",
+    img: "https://st1.bollywoodlife.com/wp-content/uploads/2023/03/Taarak-15.png",
     id: 4,
-  },
-  {
-    name: "Jetha Lal C. Gada",
-    number: "09876543212",
-    img: "https://st1.bollywoodlife.com/wp-content/uploads/2024/04/TMKOC-Jethalal-1.png",
-    id: 5,
   },
 ];
 
@@ -38,7 +38,7 @@ function App() {
   return (
     <>
       <div className="main-Container">
-        PhoneBook
+        <strong>PhoneBook</strong>
         <ContactList />
       </div>
     </>
@@ -47,6 +47,9 @@ function App() {
 
 function ContactList() {
   const [list, setList] = useState(initialData);
+  const handlenewData = (newContact) => {
+    setList([...list, newContact]);
+  };
   return (
     <>
       <div className="contact_List_Container">
@@ -58,7 +61,7 @@ function ContactList() {
             img={data.img}
           />
         ))}
-        <AddContactForm />
+        <AddContactForm onAddContact={handlenewData} />
       </div>
     </>
   );
@@ -79,7 +82,7 @@ function Contact({ name, number, img }) {
   );
 }
 
-function AddContactForm() {
+function AddContactForm({ onAddContact }) {
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -88,7 +91,12 @@ function AddContactForm() {
   );
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, number, img });
+    if (!name || !number || !img) return;
+    onAddContact({ name, number, img, id: Math.random() });
+    setImg("");
+    setName("");
+    setNumber("");
+    setShowForm(false);
   };
   return (
     <>
@@ -116,7 +124,7 @@ function AddContactForm() {
           <div className="data">
             <label>Mobile Number</label>
             <input
-              type="text"
+              type="number"
               placeholder="Mobile Number"
               value={number}
               onChange={(e) => {
