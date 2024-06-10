@@ -51,13 +51,16 @@ function App() {
           <AddFriendForm onAddFriend={handleAddFriend} />
         </div>
 
-        <BillSplit selectedFriend={selectedFriend} onBillSplit={onHandleBill} />
+        <BillSplit
+          key={selectedFriend?.name}
+          selectedFriend={selectedFriend}
+          onBillSplit={onHandleBill}
+        />
       </div>
     </>
   );
 }
 function FriendList({ list, handleSelectedFriend, selectedFriend }) {
-  console.log(list);
   return (
     <>
       <div>
