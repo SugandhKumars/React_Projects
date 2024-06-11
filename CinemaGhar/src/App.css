@@ -1,0 +1,92 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.Navbar {
+  width: 100%;
+  display: flex;
+  padding: 20px 0px;
+  background-color: rgb(128, 210, 238);
+  border: none;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 1px;
+  border-radius: 6px;
+}
+.result {
+  text-align: end;
+}
+.nav-Items {
+  font-size: 20px;
+  width: 33%;
+  margin: 0px 10px;
+}
+
+.nav-Items input {
+  width: 100%;
+  padding: 6px 10px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  height: 22px;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+}
+.movie-Containers {
+  width: 98%;
+  height: 80vh;
+  margin: 10px auto;
+  display: flex;
+  gap: 20px;
+}
+.left {
+  width: 48%;
+  background-color: rgb(235, 245, 255);
+  padding: 10px;
+  border-radius: 6px;
+  position: relative;
+}
+.right {
+  width: 48%;
+  background-color: rgb(235, 245, 255);
+  padding: 10px;
+  border-radius: 6px;
+  position: relative;
+}
+.hide {
+  padding: 2px 8px;
+  border-radius: 50%;
+  background-color: rgb(2, 2, 2);
+  border: none;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+  font-size: 20px;
+  top: 10px;
+  right: 10px;
+}
+.Movie {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+.Movie:hover {
+  background-color: rgb(185, 255, 252);
+  border-radius: 6px;
+}
+.Movie_Name_Date p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.posterContainer {
+  width: 100px;
+  height: 100px;
+  border: none;
+  background-color: lightgreen;
+  border-radius: 6px;
+}
