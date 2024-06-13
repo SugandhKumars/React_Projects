@@ -58,7 +58,7 @@ function MovieContainers({ query }) {
   const [selectedMovie, setSelectedMovie] = useState("");
   const handleSelect = (id) => {
     // console.log(id);
-    setSelectedMovie(id);
+    setSelectedMovie((selectedMovie) => (selectedMovie === id ? null : id));
   };
   return (
     <>
@@ -116,14 +116,16 @@ function Left({ query, handleSelect }) {
     </>
   );
 }
-function Right({ selectedMovie, setSelectedMovie }) {
+function Right({ selectedMovie }) {
   const [hide, setHide] = useState(true);
   const [movieDetail, setMovieDetail] = useState([]);
+  const [watchList, setWatchList] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
   useEffect(() => {
     async function fetchMovieDetail() {
       if (!selectedMovie) return; // Check if selectedMovie has a value
-
+      if (selectedMovie) setShow(true);
       setLoading(true);
       const res = await fetch(
         `https://www.omdbapi.com/?apikey=${key}&i=${selectedMovie}`
@@ -131,41 +133,39 @@ function Right({ selectedMovie, setSelectedMovie }) {
       const data = await res.json();
       console.log(data);
       setLoading(false);
-      setMovieDetail([...movieDetail, data]);
+      setMovieDetail(data);
     }
     fetchMovieDetail();
   }, [selectedMovie]);
   console.log(movieDetail);
+  const addWatchlist = (movie) => {
+    setWatchList(
+      !watchList.includes(movie) ? [...watchList, movie] : [...watchList]
+    );
+  };
+  console.log(watchList);
+  console.log(selectedMovie);
   return (
     <>
       <div className="left">
         <button className="hide" onClick={() => setHide(!hide)}>
           -
         </button>
-        {hide && !selectedMovie && <MovieDetail />}
+        {hide && !show && (
+          <MovieDetail watchList={watchList} setWatchList={setWatchList} />
+        )}
         {isLoading && "Loading..."}
-        {selectedMovie &&
-          hide &&
-          !isLoading &&
-          movieDetail?.map((movie) => {
-            return (
-              <SelectedMovies
-                key={movie?.imdbID}
-                poster={movie?.Poster}
-                title={movie?.Title}
-                setSelectedMovie={setSelectedMovie}
-                runTime={movie?.Runtime}
-                genre={movie?.Genre}
-                release={movie?.DVD}
-                actors={movie?.Actors}
-                directors={movie?.Director}
-                plot={movie?.Plot}
-                rating={movie?.imdbRating}
-              />
-            );
-          })}
-        {selectedMovie && (
-          <button className="watching-btn" onClick={() => setSelectedMovie("")}>
+
+        {show && hide && !isLoading && (
+          <SelectedMovies
+            movieDetail={movieDetail}
+            addWatchlist={addWatchlist}
+            selectedMovie={selectedMovie}
+            setShow={setShow}
+          />
+        )}
+        {show && (
+          <button className="watching-btn" onClick={() => setShow(false)}>
             ◀
           </button>
         )}
@@ -173,37 +173,96 @@ function Right({ selectedMovie, setSelectedMovie }) {
     </>
   );
 }
-function SelectedMovies({
-  poster,
-  title,
-  runTime,
-  genre,
-  release,
-  actors,
-  directors,
-  plot,
-  rating,
-}) {
+function SelectedMovies({ movieDetail, addWatchlist, selectedMovie, setShow }) {
   return (
     <>
       <div className="selectedMovieDetails">
         <div className="movieCard">
           <div className="poster">
-            <img src={poster} alt={title} />
+            <img src={movieDetail?.Poster} alt={movieDetail?.Title} />
           </div>
           <div className="details">
-            <p className="title">{title}</p>
+            <p className="title">{movieDetail?.Title}</p>
             <p className="release-Date">
-              {release} <span>. {runTime}</span>
+              {movieDetail?.Release} <span> {movieDetail?.Runtime}</span>
             </p>
-            <p>{genre}</p>
-            <p>⭐{rating} IMDB Rating</p>
+            <p>{movieDetail?.Genre}</p>
+            <p>⭐{movieDetail?.imdbRating} IMDB Rating</p>
+          </div>
+        </div>
+        <div className="star_and_add">
+          <div className="starContainer">
+            <div>Star</div>
+            <button
+              onClick={() => {
+                addWatchlist(selectedMovie);
+                setShow(false);
+              }}
+            >
+              + Add to Watchlist
+            </button>
           </div>
         </div>
         <div className="description">
-          <p>{plot}</p>
-          <p className="actors">Starring {actors}</p>
-          <p className="director">Directed by {directors}</p>
+          <p>{movieDetail?.Plot}</p>
+          <p className="actors">Starring {movieDetail?.Actors}</p>
+          <p className="director">Directed by {movieDetail?.Director}</p>
+        </div>
+      </div>
+    </>
+  );
+}
+function WatchList({ watchList }) {
+  const [myWatchList, setMyWatchList] = useState();
+  console.log(watchList);
+  useEffect(() => {
+    if (watchList.length <= 0) return;
+    const fetchData = async (id) => {
+      const response = await fetch(
+        `https://www.omdbapi.com/?apikey=${key}&i=${id}`
+      );
+      return response.json();
+    };
+    const fetchAllData = async () => {
+      const dataPromise = watchList.map((id) => fetchData(id));
+      const allData = await Promise.all(dataPromise);
+      setMyWatchList(allData);
+    };
+    fetchAllData();
+  }, []);
+  console.log(myWatchList);
+  return (
+    <>
+      <div className="my-Watchlist">
+        {myWatchList?.map((movie) => {
+          return (
+            <WatchListMovie
+              key={movie?.imdbID}
+              poster={movie?.Poster}
+              title={movie?.Title}
+              rating={movie?.imdbRating}
+              movieLength={movie?.Runtime}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
+}
+function WatchListMovie({ poster, title, rating, movieLength }) {
+  return (
+    <>
+      <div className="watchlist_Movie">
+        <div className="poster_container">
+          <img src={poster} alt={title} />
+        </div>
+        <div className="movie-details">
+          <p className="title">{title}</p>
+          <div className="rating-and-time">
+            <p className="imdbRating">⭐{rating}</p>
+            <p className="user-rating">🌟8</p>
+            <p className="movie-length">⌛{movieLength}</p>
+          </div>
         </div>
       </div>
     </>
@@ -239,18 +298,20 @@ function Movie({ title, poster, year, id, onSelect }) {
     </>
   );
 }
-function MovieDetail() {
+function MovieDetail({ watchList, setWatchList }) {
+  console.log("MovieDetail");
   return (
     <>
       <div className="movie-detail">
         <p className="big">Movies You Have Watched</p>
         <div className="movie-details-des">
-          <p>0 Movies</p>
+          <p>{watchList.length} Movies</p>
           <p>⭐0</p>
           <p>🌟0</p>
           <p>⌛120 min</p>
         </div>
       </div>
+      <WatchList watchList={watchList} />
     </>
   );
 }
