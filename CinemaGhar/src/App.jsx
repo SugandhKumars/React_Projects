@@ -200,6 +200,16 @@ function SelectedMovies({
   userRating,
   setUserRating,
 }) {
+  console.log(movieDetail);
+  useEffect(() => {
+    if (!movieDetail) return;
+    document.title = "Movie | " + movieDetail?.Title;
+
+    return () => {
+      document.title = "CinemaGhar";
+      console.log("Clean the Movie " + movieDetail?.Title);
+    };
+  }, [movieDetail]);
   return (
     <div className="selectedMovieDetails">
       <div className="movieCard">
@@ -209,7 +219,7 @@ function SelectedMovies({
         <div className="details">
           <p className="title">{movieDetail?.Title}</p>
           <p className="release-Date">
-            {movieDetail?.Release} <span> {movieDetail?.Runtime}</span>
+            {movieDetail?.Released} <span> {movieDetail?.Runtime}</span>
           </p>
           <p>{movieDetail?.Genre}</p>
           <p>⭐{movieDetail?.imdbRating} IMDB Rating</p>
