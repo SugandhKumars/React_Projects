@@ -5,10 +5,15 @@ import Ystar from "./assets/YellowStar.svg";
 
 function App() {
   const [query, setQuery] = useState("");
+  const [movielist, setMovieList] = useState([]);
   return (
     <div className="main">
-      <NavBar query={query} setQuery={setQuery} />
-      <MovieContainers query={query} />
+      <NavBar query={query} setQuery={setQuery} movielist={movielist} />
+      <MovieContainers
+        query={query}
+        movielist={movielist}
+        setMovieList={setMovieList}
+      />
     </div>
   );
 }
@@ -41,12 +46,12 @@ function Star({ width = "28px", height = "28px", onSetRating, currentRating }) {
   );
 }
 
-function NavBar({ query, setQuery }) {
+function NavBar({ query, setQuery, movielist }) {
   return (
     <div className="Navbar">
       <Logo />
       <Searchbar query={query} setQuery={setQuery} />
-      <Results />
+      <Results movielist={movielist} />
     </div>
   );
 }
@@ -59,6 +64,7 @@ function Searchbar({ query, setQuery }) {
   return (
     <div className="nav-Items">
       <input
+        className="INput"
         type="text"
         placeholder="Search"
         value={query}
@@ -68,18 +74,27 @@ function Searchbar({ query, setQuery }) {
   );
 }
 
-function Results() {
-  return <div className="nav-Items result">Results</div>;
+function Results({ movielist }) {
+  return (
+    <div className="nav-Items result">
+      {movielist ? `${movielist?.length} movies found` : "Results"}
+    </div>
+  );
 }
 
-function MovieContainers({ query }) {
+function MovieContainers({ query, movielist, setMovieList }) {
   const [selectedMovie, setSelectedMovie] = useState("");
   const handleSelect = (id) => {
     setSelectedMovie((selectedMovie) => (selectedMovie === id ? null : id));
   };
   return (
     <div className="movie-Containers">
-      <Left query={query} handleSelect={handleSelect} />
+      <Left
+        query={query}
+        handleSelect={handleSelect}
+        movielist={movielist}
+        setMovieList={setMovieList}
+      />
       <Right selectedMovie={selectedMovie} />
     </div>
   );
@@ -87,9 +102,9 @@ function MovieContainers({ query }) {
 
 const key = "31018f1c";
 
-function Left({ query, handleSelect }) {
+function Left({ query, handleSelect, setMovieList, movielist }) {
   const [hide, setHide] = useState(true);
-  const [movielist, setMovieList] = useState([]);
+
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -104,7 +119,7 @@ function Left({ query, handleSelect }) {
     }
     fetchMovies();
   }, [query]);
-
+  console.log(movielist);
   return (
     <div className="left">
       {isLoading
@@ -361,12 +376,12 @@ function MovieDetail({ watchList, userRatings }) {
   return (
     <div className="movie-detail">
       <p className="big">Movies You Have Watched</p>
-      <div className="movie-details-des">
+      {/* <div className="movie-details-des">
         <p>{watchList.length} Movies</p>
         <p>⭐0</p>
         <p>🌟0</p>
         <p>⌛120 min</p>
-      </div>
+      </div> */}
       <WatchList watchList={watchList} userRatings={userRatings} />
     </div>
   );

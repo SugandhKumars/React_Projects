@@ -249,3 +249,9 @@
   font-size: 20px;
   cursor: pointer;
 }
+.INput {
+  box-shadow: 5px 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: rgb(128, 210, 238);
+  color: white;
+  font-size: 18px;
+}
