@@ -14,10 +14,16 @@ function App() {
         `https://api.frankfurter.app/latest?amount=${input}&from=${from}&to=${to}`
       );
       const data = await res.json();
-      setConvert(data?.rates?.INR);
+      setConvert(data?.rates);
+    }
+    if (from == to) {
+      setConvert(input);
+      return;
     }
     fetchCurrency();
   }, [to, from, input]);
+  console.log(convert[to]);
+  console.log(to);
   return (
     <>
       <div>Currency Converter</div>
@@ -26,7 +32,11 @@ function App() {
         <FromCurrency from={from} setFrom={setFrom} />
         <ToCurrency to={to} setTo={setTo} />
       </div>
-      <p>{convert ? convert : "Result"}</p>
+      <p>
+        {convert[to] || convert
+          ? (convert[to] || convert) + " " + to
+          : "Result"}
+      </p>
     </>
   );
 }
