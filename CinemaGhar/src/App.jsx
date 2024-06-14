@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import star from "./assets/whiteStar.svg";
 import Ystar from "./assets/YellowStar.svg";
+import { useRef } from "react";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -61,6 +62,10 @@ function Logo() {
 }
 
 function Searchbar({ query, setQuery }) {
+  const input = useRef(null);
+  useEffect(() => {
+    input.current.focus();
+  }, []);
   return (
     <div className="nav-Items">
       <input
@@ -69,6 +74,7 @@ function Searchbar({ query, setQuery }) {
         placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        ref={input}
       />
     </div>
   );
@@ -119,7 +125,7 @@ function Left({ query, handleSelect, setMovieList, movielist }) {
     }
     fetchMovies();
   }, [query]);
-  console.log(movielist);
+
   return (
     <div className="left">
       {isLoading
@@ -145,7 +151,10 @@ function Left({ query, handleSelect, setMovieList, movielist }) {
 function Right({ selectedMovie }) {
   const [hide, setHide] = useState(true);
   const [movieDetail, setMovieDetail] = useState([]);
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState(function () {
+    let list = JSON.parse(localStorage.getItem("movie"));
+    return list || [];
+  });
   const [isLoading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [userRatings, setUserRatings] = useState({});
@@ -170,12 +179,18 @@ function Right({ selectedMovie }) {
       !watchList.includes(movie) ? [...watchList, movie] : [...watchList]
     );
   };
-
+  useEffect(() => {
+    localStorage.setItem("movie", JSON.stringify(watchList));
+  }, [watchList]);
   const setUserRating = (rating) => {
     setUserRatings((prevRatings) => ({
       ...prevRatings,
       [selectedMovie]: rating,
     }));
+  };
+  const removeMovie = (id) => {
+    let nw = watchList.filter((movie) => movie !== id);
+    setWatchList(nw);
   };
 
   return (
@@ -184,7 +199,11 @@ function Right({ selectedMovie }) {
         -
       </button>
       {hide && !show && (
-        <MovieDetail watchList={watchList} userRatings={userRatings} />
+        <MovieDetail
+          watchList={watchList}
+          userRatings={userRatings}
+          removeMovie={removeMovie}
+        />
       )}
       {isLoading && "Loading..."}
 
@@ -215,14 +234,12 @@ function SelectedMovies({
   userRating,
   setUserRating,
 }) {
-  console.log(movieDetail);
   useEffect(() => {
     if (!movieDetail) return;
     document.title = "Movie | " + movieDetail?.Title;
 
     return () => {
       document.title = "CinemaGhar";
-      console.log("Clean the Movie " + movieDetail?.Title);
     };
   }, [movieDetail]);
   return (
@@ -266,11 +283,14 @@ function SelectedMovies({
   );
 }
 
-function WatchList({ watchList, userRatings }) {
+function WatchList({ watchList, userRatings, removeMovie }) {
   const [myWatchList, setMyWatchList] = useState([]);
 
   useEffect(() => {
-    if (watchList.length <= 0) return;
+    if (watchList.length == 0) {
+      setMyWatchList([]);
+      return;
+    }
     const fetchData = async (id) => {
       const response = await fetch(
         `https://www.omdbapi.com/?apikey=${key}&i=${id}`
@@ -285,13 +305,6 @@ function WatchList({ watchList, userRatings }) {
     fetchAllData();
   }, [watchList]);
 
-  const onRemoveMovie = (id) => {
-    let filter = myWatchList?.filter((movie) => {
-      return movie?.imdbID !== id;
-    });
-    setMyWatchList(filter);
-  };
-
   return (
     <div className="my-Watchlist">
       {myWatchList?.map((movie) => (
@@ -303,7 +316,7 @@ function WatchList({ watchList, userRatings }) {
           title={movie?.Title}
           rating={movie?.imdbRating}
           movieLength={movie?.Runtime}
-          onRemoveMovie={onRemoveMovie}
+          removeMovie={removeMovie}
         />
       ))}
     </div>
@@ -317,7 +330,7 @@ function WatchListMovie({
   movieLength,
   userRating,
   id,
-  onRemoveMovie,
+  removeMovie,
 }) {
   return (
     <div className="watchlist_Movie">
@@ -335,7 +348,7 @@ function WatchListMovie({
       <button
         className="removeMovie"
         onClick={() => {
-          onRemoveMovie(id);
+          removeMovie(id);
         }}
       >
         -
@@ -372,17 +385,21 @@ function Movie({ title, poster, year, id, onSelect }) {
   );
 }
 
-function MovieDetail({ watchList, userRatings }) {
+function MovieDetail({ watchList, userRatings, removeMovie }) {
   return (
     <div className="movie-detail">
       <p className="big">Movies You Have Watched</p>
-      {/* <div className="movie-details-des">
-        <p>{watchList.length} Movies</p>
-        <p>⭐0</p>
+      <div className="movie-details-des">
+        <p>{watchList.length} Movie</p>
+        {/* <p>⭐0</p>
         <p>🌟0</p>
-        <p>⌛120 min</p>
-      </div> */}
-      <WatchList watchList={watchList} userRatings={userRatings} />
+        <p>⌛120 min</p> */}
+      </div>
+      <WatchList
+        watchList={watchList}
+        userRatings={userRatings}
+        removeMovie={removeMovie}
+      />
     </div>
   );
 }
