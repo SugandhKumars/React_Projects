@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import star from "./assets/whiteStar.svg";
-import Ystar from "./assets/YellowStar.svg";
+import star from "../assets/whiteStar.svg";
+import Ystar from "../assets/YellowStar.svg";
 import { useRef } from "react";
 
 function App() {

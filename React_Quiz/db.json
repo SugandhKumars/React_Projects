@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "question": "Which is the most popular javascript framework",
+      "options": ["Angular", "React", "Sevlate", "Vue"],
+      "correctOptions": 1,
+      "points": 10
+    },
+    {
+      "question": "Which is the most popular javascript framework",
+      "options": ["Angular", "React", "Sevlate", "Vue"],
+      "correctOptions": 1,
+      "points": 10
+    },
+    {
+      "question": "Which is the most popular javascript framework",
+      "options": ["Angular", "React", "Sevlate", "Vue"],
+      "correctOptions": 1,
+      "points": 10
+    },
+    {
+      "question": "Which is the most popular javascript framework",
+      "options": ["Angular", "React", "Sevlate", "Vue"],
+      "correctOptions": 1,
+      "points": 10
+    }
+  ]
+}
