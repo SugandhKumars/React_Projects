@@ -1,7 +1,7 @@
 import React from "react";
 import Options from "./Options";
 
-const Question = ({ question, dispatch, answer, index, maxPoints }) => {
+const Question = ({ question, dispatch, answer, index, totalQues }) => {
   return (
     <div style={{ textAlign: "center" }}>
       <p className="question mb">{question.question}</p>
@@ -11,6 +11,7 @@ const Question = ({ question, dispatch, answer, index, maxPoints }) => {
         dispatch={dispatch}
         answer={answer}
         index={index}
+        totalQues={totalQues}
       />
     </div>
   );

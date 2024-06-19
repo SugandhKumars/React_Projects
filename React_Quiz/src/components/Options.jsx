@@ -1,6 +1,6 @@
 import React from "react";
 
-function Options({ question, dispatch, answer, index }) {
+function Options({ question, dispatch, answer, index, totalQues }) {
   console.log(answer);
   let ans = answer !== null;
   console.log(ans);
@@ -18,12 +18,20 @@ function Options({ question, dispatch, answer, index }) {
         </button>
       ))}
 
-      {ans && (
+      {ans && index < totalQues - 1 && (
         <button
           onClick={() => dispatch({ type: "nextQue", payload: index + 1 })}
           className="nxt-btn"
         >
           Next
+        </button>
+      )}
+      {ans && index == totalQues - 1 && (
+        <button
+          onClick={() => dispatch({ type: "finish", payload: "finished" })}
+          className="nxt-btn"
+        >
+          Finish
         </button>
       )}
     </div>

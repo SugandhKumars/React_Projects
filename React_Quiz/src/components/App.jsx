@@ -34,6 +34,8 @@ function reducer(state, action) {
       };
     case "nextQue":
       return { ...state, index: action.payload, answer: null };
+    case "finish":
+      return { ...state, status: action.payload };
     default:
       throw new Error("Unknown Action");
   }
@@ -80,6 +82,7 @@ function App() {
               question={questions[index]}
               dispatch={dispatch}
               answer={answer}
+              totalQues={questions.length}
             />
           </Main>
         )}
