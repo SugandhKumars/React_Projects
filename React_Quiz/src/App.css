@@ -1,21 +1,51 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   background-color: black;
   color: white;
-}
+} */
 
 .mb {
   margin-bottom: 30px;
 }
-.option-ui {
+.left {
+  margin-left: 40px;
+}
+.ui-Options {
   border: none;
-  width: 100%;
-  padding: 10px;
-  display: block;
-  background-color: gray;
-  border-radius: 10px;
+  width: 80%;
+  padding: 14px 18px;
+  border-radius: 30px;
+  text-align: left;
   cursor: pointer;
+  display: block;
+}
+.option {
+  width: 40%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+.nxt-btn {
+  position: absolute;
+  right: 10px;
+  bottom: -60px;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.green {
+  background-color: lightgreen;
+}
+.red {
+  background-color: red;
+}
+.right {
+  margin-right: 10px;
 }
 .option-ui:hover {
   background-color: #fffcfc;
