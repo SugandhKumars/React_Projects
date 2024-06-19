@@ -4,6 +4,8 @@ import Main from "./Main";
 import { useEffect, useReducer } from "react";
 import StartPage from "./StartPage";
 import Question from "./Question";
+import Progress from "./Progress";
+import FinishPage from "./FinishPage";
 
 let initailState = {
   questions: [],
@@ -39,7 +41,7 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initailState);
-  const { questions, status, index, answer } = state;
+  const { questions, status, index, answer, points } = state;
 
   useEffect(() => {
     async function getQuestion() {
@@ -50,12 +52,15 @@ function App() {
     }
     getQuestion();
   }, []);
+  console.log(questions);
+  let maxPoints = questions.reduce((acc, curr) => acc + curr.points, 0);
 
   return (
     <>
       <div className="poppins-regular">
         <Header />
         {status == "Loading" && <Main>Loading</Main>}
+
         {status == "ready" && (
           <Main>
             <StartPage dispatch={dispatch} question={questions} />
@@ -63,6 +68,13 @@ function App() {
         )}
         {status == "active" && (
           <Main>
+            <Progress
+              totalQues={questions.length}
+              index={index}
+              maxPoints={maxPoints}
+              points={points}
+              answer={answer}
+            />
             <Question
               index={index}
               question={questions[index]}
@@ -70,6 +82,9 @@ function App() {
               answer={answer}
             />
           </Main>
+        )}
+        {status == "finished" && (
+          <FinishPage points={points} maxPoints={maxPoints} />
         )}
       </div>
     </>
