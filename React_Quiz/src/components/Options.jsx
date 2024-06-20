@@ -1,9 +1,8 @@
 import React from "react";
 
 function Options({ question, dispatch, answer, index, totalQues }) {
-  console.log(answer);
   let ans = answer !== null;
-  console.log(ans);
+
   return (
     <div className="option">
       {question.options.map((opt, i) => (
