@@ -3,77 +3,120 @@ import "./App.css";
 
 function App() {
   const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [post, setPost] = useState([]);
+  const [search, setSearch] = useState("");
+  const filteredPosts = post.filter(
+    (post) =>
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.body.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <>
       <div className="container">
-        <Header />
-        <AddPost />
-        <BlogPostContainer />
+        <Header
+          search={search}
+          setSearch={setSearch}
+          post={post}
+          setPost={setPost}
+          result={filteredPosts.length}
+        />
+        <AddPost
+          title={title}
+          setTitle={setTitle}
+          body={body}
+          setBody={setBody}
+          post={post}
+          setPost={setPost}
+        />
+        <BlogPostContainer post={filteredPosts} />
       </div>
     </>
   );
 }
 
-function Header() {
+function Header({ search, setSearch, setPost, result }) {
   return (
     <>
       <div className="header">
         <div className="logo">The Blog Post</div>
         <div className="left">
-          <p className="result">X Post found</p>
+          <p className="result">{result} Post found</p>
           <p className="search">
-            <input type="text" placeholder="Search Post" />
+            <input
+              type="text"
+              placeholder="Search Post"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
           </p>
-          <p className="clearPost">Clear Post</p>
+          <p className="clearPost" onClick={() => setPost([])}>
+            Clear Post
+          </p>
         </div>
       </div>
     </>
   );
 }
 
-function AddPost() {
+function AddPost({ title, setTitle, body, setBody, post, setPost }) {
+  const addPost = () => {
+    if (!title || !body) return;
+    setPost([...post, { title, body, id: Math.random() }]);
+    setTitle("");
+    setBody("");
+  };
+  console.log(post);
   return (
     <>
       <div className="addpost">
-        <input type="text" placeholder="Post-title" className="Title" />
+        <input
+          type="text"
+          placeholder="Post-title"
+          className="Title"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
 
-        <textarea type="text" placeholder="Post-Body" className="body" />
+        <textarea
+          type="text"
+          placeholder="Post-Body"
+          className="body"
+          value={body}
+          onChange={(e) => {
+            setBody(e.target.value);
+          }}
+        />
 
-        <button>Add post</button>
+        <button onClick={addPost}>Add post</button>
       </div>
     </>
   );
 }
 
-function BlogPostContainer() {
+function BlogPostContainer({ post }) {
   return (
     <>
       <div className="post_Container">
-        <BlogPost />
-        <BlogPost />
-        <BlogPost />
-        <BlogPost />
-        <BlogPost />
-        <BlogPost />
-        <BlogPost />
-        <BlogPost />
+        {post?.map((post) => (
+          <BlogPost key={post?.id} title={post?.title} body={post?.body} />
+        ))}
       </div>
     </>
   );
 }
 
-function BlogPost() {
+function BlogPost({ title, body }) {
   return (
     <>
       <div className="post">
-        <p className="post_title">My Blog Post</p>
-        <p className="post_body">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet illo
-          odio doloremque, dolorum nobis neque quaerat pariatur quibusdam rem
-          aliquam velit veritatis ducimus nostrum sapiente corporis fugit ipsam
-          distinctio consequatur.
-        </p>
+        <p className="post_title">{title}</p>
+        <p className="post_body">{body}</p>
       </div>
     </>
   );
