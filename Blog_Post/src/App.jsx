@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./App.css";
-
+import { createContext } from "react";
+const PostContext = createContext();
 function App() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -13,30 +14,32 @@ function App() {
   );
 
   return (
-    <>
+    <PostContext.Provider
+      value={{
+        result: filteredPosts.length,
+        search,
+        setSearch,
+        post,
+        setPost,
+        title,
+        setTitle,
+        body,
+        setBody,
+        filteredPosts,
+      }}
+    >
       <div className="container">
-        <Header
-          search={search}
-          setSearch={setSearch}
-          post={post}
-          setPost={setPost}
-          result={filteredPosts.length}
-        />
-        <AddPost
-          title={title}
-          setTitle={setTitle}
-          body={body}
-          setBody={setBody}
-          post={post}
-          setPost={setPost}
-        />
-        <BlogPostContainer post={filteredPosts} />
+        <Header />
+        <AddPost />
+        <BlogPostContainer />
       </div>
-    </>
+    </PostContext.Provider>
   );
 }
 
-function Header({ search, setSearch, setPost, result }) {
+function Header() {
+  const { search, setSearch, setPost, result } = useContext(PostContext);
+
   return (
     <>
       <div className="header">
@@ -62,7 +65,9 @@ function Header({ search, setSearch, setPost, result }) {
   );
 }
 
-function AddPost({ title, setTitle, body, setBody, post, setPost }) {
+function AddPost() {
+  const { title, setTitle, body, setBody, post, setPost } =
+    useContext(PostContext);
   const addPost = () => {
     if (!title || !body) return;
     setPost([...post, { title, body, id: Math.random() }]);
@@ -99,11 +104,13 @@ function AddPost({ title, setTitle, body, setBody, post, setPost }) {
   );
 }
 
-function BlogPostContainer({ post }) {
+function BlogPostContainer() {
+  const { filteredPosts } = useContext(PostContext);
+  console.log(filteredPosts);
   return (
     <>
       <div className="post_Container">
-        {post?.map((post) => (
+        {filteredPosts?.map((post) => (
           <BlogPost key={post?.id} title={post?.title} body={post?.body} />
         ))}
       </div>
