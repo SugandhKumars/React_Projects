@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  text-decoration: none;
+}
+
+.nav li {
+  list-style: none;
+}
+.text {
+  text-decoration: none;
+  color: white;
+}
+.large {
+  font-size: 30px;
+  font-weight: 600;
+}
+.right {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+:global(.active) {
+  color: green;
+}

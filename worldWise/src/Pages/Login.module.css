@@ -1,0 +1,16 @@
+.form {
+  color: white;
+  width: 40%;
+  border-radius: 8px;
+  padding: 10px 30px;
+  margin: 50px auto;
+  background-color: rgb(20, 19, 19);
+}
+.form input {
+  width: 100%;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  outline: none;
+  border: none;
+}

@@ -1,0 +1,18 @@
+.fot {
+  background-color: blue;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+.main {
+  padding: 10px 30px;
+  background-color: black;
+  height: 94vh;
+  margin: 20px;
+}
+.active {
+  color: green;
+}

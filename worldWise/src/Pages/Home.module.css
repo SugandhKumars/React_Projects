@@ -1,0 +1,13 @@
+.Home {
+  background-image: linear-gradient(rgba(17, 15, 15, 0.4), rgba(0, 0, 0, 0.5)),
+    url("https://images.pexels.com/photos/50594/sea-bay-waterfront-beach-50594.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.main {
+  padding: 10px 30px;
+
+  height: 94vh;
+  margin: 20px;
+}
