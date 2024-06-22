@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../Components/NavBar";
 import Style from "./Pricing.module.css";
 import Button from "../Components/Button";
+import { NavLink } from "react-router-dom";
 function Pricing() {
   return (
     <div className={`main`}>
@@ -17,7 +18,9 @@ function Pricing() {
             exercitationem esse fuga ut eius, eos hic facilis tempora
             reiciendis, maxime amet?
           </p>
-          <Button>Start Tracking Now</Button>
+          <NavLink to="/app">
+            <Button> Start Tracking Now</Button>
+          </NavLink>
         </div>
         <div className={Style.right}>
           <img

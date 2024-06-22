@@ -1,0 +1,20 @@
+{
+  "cities": [
+    {
+      "name": "Virndavan",
+      "emoji": "🦚",
+      "title": "A religous place that close to my Heart 💖.",
+      "date": "26-11-2023",
+      "Country": "India",
+      "id": 1
+    },
+    {
+      "name": "Mathura",
+      "emoji": "🦚",
+      "title": "A religous place that close to my Heart 💖.",
+      "date": "26-11-2023",
+      "Country": "India",
+      "id": 2
+    }
+  ]
+}

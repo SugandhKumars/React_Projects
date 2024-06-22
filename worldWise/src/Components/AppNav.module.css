@@ -1,0 +1,26 @@
+.appNav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.appNav ul {
+  display: flex;
+  background-color: gray;
+  border-radius: 8px;
+}
+.appNav ul li {
+  padding: 6px 10px;
+  /* border-radius: 8px; */
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.link:global(.active) {
+  background-color: rgb(150, 150, 150);
+  border-radius: 8px;
+}

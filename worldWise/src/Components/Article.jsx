@@ -1,6 +1,7 @@
 import React from "react";
 import Style from "./Article.module.css";
 import Button from "./Button";
+import { NavLink } from "react-router-dom";
 function Article() {
   return (
     <section className={Style.articleContainer}>
@@ -14,7 +15,9 @@ function Article() {
         ea! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora,
         voluptates.
       </div>
-      <Button> Start Tracking Now</Button>
+      <NavLink to="/app">
+        <Button> Start Tracking Now</Button>
+      </NavLink>
     </section>
   );
 }

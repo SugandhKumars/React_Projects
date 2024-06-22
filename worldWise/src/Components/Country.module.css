@@ -1,0 +1,9 @@
+.country {
+  background-color: rgb(26, 25, 25);
+  padding: 20px 8px;
+  width: 40%;
+  border-radius: 8px;
+  border-top: 10px solid rgb(222, 236, 28);
+  cursor: pointer;
+  font-size: 20px;
+}

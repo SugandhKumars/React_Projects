@@ -1,0 +1,28 @@
+.cityItem {
+  width: 60%;
+  padding: 10px 6px;
+  background-color: rgb(43, 42, 42);
+  border-radius: 10px;
+  cursor: pointer;
+  border-left: 8px solid rgb(235, 98, 57);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.message {
+  font-size: 12px;
+  color: lightcoral;
+}
+.date {
+  font-size: 12px;
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date p {
+  padding: 2px 6px;
+  background-color: rgb(83, 79, 79);
+  border-radius: 50%;
+}

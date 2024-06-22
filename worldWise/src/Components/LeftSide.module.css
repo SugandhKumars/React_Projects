@@ -1,0 +1,15 @@
+.left {
+  width: 50%;
+  text-align: center;
+}
+.link {
+  text-decoration: none;
+  color: green;
+}
+.Logo {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}

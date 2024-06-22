@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../Components/NavBar";
 import Style from "./Product.module.css";
 import Button from "../Components/Button";
+import { NavLink } from "react-router-dom";
 function Product() {
   return (
     <div className="main">
@@ -29,7 +30,9 @@ function Product() {
               reiciendis, maxime amet?
             </p>
           </p>
-          <Button>Start Tracking Now</Button>
+          <NavLink to="/app">
+            <Button> Start Tracking Now</Button>
+          </NavLink>
         </div>
       </article>
     </div>

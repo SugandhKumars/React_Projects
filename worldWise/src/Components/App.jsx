@@ -4,6 +4,10 @@ import Product from "../Pages/Product";
 import Home from "../Pages/Home";
 import Pricing from "../Pages/Pricing";
 import Login from "../Pages/Login";
+import AppLayout from "../Pages/AppLayout";
+import { p } from "doker/lib/mixins/formatting";
+import CityList from "./CityList";
+import CountryList from "./CountryList";
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/app" element={<AppLayout />}>
+            <Route path="cities" element={<CityList />} />
+            <Route path="country" element={<CountryList />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
