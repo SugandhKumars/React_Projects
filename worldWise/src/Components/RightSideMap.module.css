@@ -3,3 +3,6 @@
   /* border: 2px solid white; */
   background-color: rgba(29, 27, 27, 0.938);
 }
+.map {
+  height: 100%;
+}
