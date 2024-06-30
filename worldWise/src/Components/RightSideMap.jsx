@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RightSideMap.module.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvent,
+} from "react-leaflet";
 import CityItem from "./CityItem";
+import { useNavigate, useSearchParams } from "react-router-dom";
 function RightSideMap() {
   const [mapPosition, setMapPosition] = useState([22.2442, 68.9685]);
   const [city, setCity] = useState([]);
+  const [search, setSarch] = useSearchParams();
 
+  let mapLat = search.get("lat");
+  let mapLang = search.get("lang");
   useEffect(() => {
     async function getCity() {
       let res = await fetch(`http://localhost:3000/cities`);
@@ -14,7 +25,10 @@ function RightSideMap() {
     }
     getCity();
   }, []);
-  console.log(city);
+  useEffect(() => {
+    if (mapLat || mapLang) setMapPosition([mapLat, mapLang]);
+  }, [mapLat, mapLang]);
+
   return (
     <div className={styles.right}>
       <MapContainer
@@ -37,9 +51,24 @@ function RightSideMap() {
             </Popup>
           </Marker>
         ))}
+        <Change position={mapPosition} />
+        <DetectClick />
       </MapContainer>
     </div>
   );
+}
+function Change({ position }) {
+  const map = useMap();
+  map.setView(position);
+  return null;
+}
+function DetectClick() {
+  const navigate = useNavigate();
+  useMapEvent({
+    click: (e) => {
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+    },
+  });
 }
 
 export default RightSideMap;

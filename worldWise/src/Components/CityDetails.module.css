@@ -1,0 +1,36 @@
+.CityDetails {
+  background-color: rgb(24, 23, 23);
+  width: 400px;
+
+  border-radius: 10px;
+  margin: 10px auto;
+  font-family: sans-serif;
+  padding: 20px;
+}
+p {
+  text-align: left;
+}
+.title {
+  font-size: 12px;
+  color: lightgray;
+  font-weight: 500;
+}
+.city {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 12px;
+}
+.date,
+.notes {
+  font-size: 17px;
+  color: rgb(240, 237, 237);
+  margin-bottom: 12px;
+}
+.btn {
+  border: 1px solid;
+  background-color: rgb(24, 23, 23);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}

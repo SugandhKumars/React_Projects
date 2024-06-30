@@ -1,20 +1,22 @@
 import React from "react";
 import styles from "./CityItem.module.css";
-function CityItem({ city, emoji, date, message }) {
+import { Link, useParams } from "react-router-dom";
+function CityItem({ city, emoji, date, message, id, position }) {
   return (
-    <div className={styles.cityItem}>
+    <Link
+      to={`${id}?lat=${position.lat}&lang=${position.lang}`}
+      className={`${styles.cityItem} `}
+    >
       <div>
         <p className={styles.name}>
           {city} {emoji}
         </p>
-
-        <p className={styles.message}>{message}</p>
       </div>
 
       <div className={styles.date}>
         {date} <p>X</p>
       </div>
-    </div>
+    </Link>
   );
 }
 

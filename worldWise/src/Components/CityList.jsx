@@ -4,6 +4,7 @@ import styles from "./CItyList.module.css";
 
 function CityList() {
   const [city, setCity] = useState([]);
+  const [currentCity, setCurrentCity] = useState(null);
 
   useEffect(() => {
     async function getCity() {
@@ -19,10 +20,14 @@ function CityList() {
       {city?.map((detail) => (
         <CityItem
           key={detail?.id}
+          id={detail?.id}
           city={detail?.name}
           emoji={detail?.emoji}
           date={detail?.date}
           message={detail?.title}
+          currentCity={currentCity}
+          setCurrentCity={setCurrentCity}
+          position={detail?.position}
         />
       ))}
     </div>

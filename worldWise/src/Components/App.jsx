@@ -5,9 +5,10 @@ import Home from "../Pages/Home";
 import Pricing from "../Pages/Pricing";
 import Login from "../Pages/Login";
 import AppLayout from "../Pages/AppLayout";
-import { p } from "doker/lib/mixins/formatting";
 import CityList from "./CityList";
 import CountryList from "./CountryList";
+import CityDetails from "./CityDetails";
+import Form from "./Form";
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="cities" element={<CityList />} />
+            <Route path="cities/:id" element={<CityDetails />} />
+
             <Route path="country" element={<CountryList />} />
+            <Route path="form" element={<Form />} />
           </Route>
         </Routes>
       </BrowserRouter>

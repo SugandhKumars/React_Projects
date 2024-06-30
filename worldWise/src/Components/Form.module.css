@@ -1,0 +1,20 @@
+.form {
+  width: 300px;
+  background-color: rgb(24, 23, 23);
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+  font-family: sans-serif;
+}
+
+.cityName {
+  font-size: 16px;
+}
+input {
+  background-color: lightgray;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+}
