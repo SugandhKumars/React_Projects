@@ -23,11 +23,12 @@ Link {
 }
 .date {
   font-size: 12px;
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .date p {
   padding: 2px 6px;
   background-color: rgb(83, 79, 79);

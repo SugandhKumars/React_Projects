@@ -10,13 +10,11 @@ import {
 } from "react-leaflet";
 import CityItem from "./CityItem";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import useSearchUrl from "../hooks/useSearchUrl";
 function RightSideMap() {
   const [mapPosition, setMapPosition] = useState([22.2442, 68.9685]);
   const [city, setCity] = useState([]);
-  const [search, setSarch] = useSearchParams();
-
-  let mapLat = search.get("lat");
-  let mapLang = search.get("lang");
+  const [lat, lang] = useSearchUrl();
   useEffect(() => {
     async function getCity() {
       let res = await fetch(`http://localhost:3000/cities`);
@@ -25,9 +23,10 @@ function RightSideMap() {
     }
     getCity();
   }, []);
+
   useEffect(() => {
-    if (mapLat || mapLang) setMapPosition([mapLat, mapLang]);
-  }, [mapLat, mapLang]);
+    if (lat || lang) setMapPosition([lat, lang]);
+  }, [lat, lang]);
 
   return (
     <div className={styles.right}>
@@ -66,7 +65,7 @@ function DetectClick() {
   const navigate = useNavigate();
   useMapEvent({
     click: (e) => {
-      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+      navigate(`form?lat=${e.latlng.lat}&lang=${e.latlng.lng}`);
     },
   });
 }

@@ -1,13 +1,14 @@
 .form {
-  width: 300px;
+  width: 400px;
   background-color: rgb(24, 23, 23);
-  padding: 10px;
+  padding: 10px 20px;
   margin: 10px auto;
   border-radius: 10px;
   font-family: sans-serif;
+  /* padding-bottom: 20px;  */
 }
 
-.cityName {
+.label {
   font-size: 16px;
 }
 input {
@@ -17,4 +18,42 @@ input {
   border-radius: 10px;
   padding: 10px;
   width: 100%;
+  margin: 10px auto;
+}
+.btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.btn1 {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background-color: green;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn2 {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background-color: rgb(39, 37, 37);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.notes {
+  height: 60px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 10px;
+}
+.date {
+  margin-left: 0;
+  width: 350px;
 }

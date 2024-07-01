@@ -14,6 +14,14 @@ function CityList() {
     }
     getCity();
   }, []);
+  async function handleRemove(e, id) {
+    e.preventDefault();
+    const res = await fetch(`http://localhost:3000/cities/${id}`, {
+      method: "DELETE",
+    });
+    const filterCities = city?.filter((citi) => citi?.id != id);
+    setCity(filterCities);
+  }
 
   return (
     <div className={styles.CityList}>
@@ -28,6 +36,7 @@ function CityList() {
           currentCity={currentCity}
           setCurrentCity={setCurrentCity}
           position={detail?.position}
+          handleRemove={handleRemove}
         />
       ))}
     </div>

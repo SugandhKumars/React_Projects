@@ -6,8 +6,11 @@
       "title": "A religous place that close to my Heart 💖.",
       "date": "26-11-2023",
       "Country": "India",
-      "id": 1,
-      "position": { "lat": "27.5650", "lang": "77.6593" }
+      "id": "1",
+      "position": {
+        "lat": "27.5650",
+        "lang": "77.6593"
+      }
     },
     {
       "name": "Mathura",
@@ -15,17 +18,22 @@
       "title": "A religous place that close to my Heart 💖.",
       "date": "26-11-2023",
       "Country": "India",
-      "id": 2,
-      "position": { "lat": "27.4924", "lang": "77.6737" }
+      "id": "2",
+      "position": {
+        "lat": "27.4924",
+        "lang": "77.6737"
+      }
     },
     {
+      "id": "e1e1",
       "name": "Dwarka",
-      "emoji": "🦚",
-      "title": "A religous place that close to my Heart 💖.",
-      "date": "Not Visited till date",
       "Country": "India",
-      "id": 3,
-      "position": { "lat": "22.2442", "lang": "68.9685" }
+      "date": "2024-07-01T09:14:39.748Z",
+      "title": "",
+      "position": {
+        "lat": "22.2452405490483",
+        "lang": "68.97502092860812"
+      }
     }
   ]
 }

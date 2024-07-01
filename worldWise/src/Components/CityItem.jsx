@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CityItem.module.css";
 import { Link, useParams } from "react-router-dom";
-function CityItem({ city, emoji, date, message, id, position }) {
+function CityItem({ city, emoji, date, message, id, position, handleRemove }) {
   return (
     <Link
       to={`${id}?lat=${position.lat}&lang=${position.lang}`}
@@ -14,7 +14,7 @@ function CityItem({ city, emoji, date, message, id, position }) {
       </div>
 
       <div className={styles.date}>
-        {date} <p>X</p>
+        <div>{date}</div> <p onClick={(e) => handleRemove(e, id)}>X</p>
       </div>
     </Link>
   );
