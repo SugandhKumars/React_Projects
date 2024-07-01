@@ -1,31 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CityItem from "./CityItem";
 import styles from "./CItyList.module.css";
+import { CityContext } from "./App";
 
 function CityList() {
-  const [city, setCity] = useState([]);
-  const [currentCity, setCurrentCity] = useState(null);
+  const { cities, setCities } = useContext(CityContext);
 
-  useEffect(() => {
-    async function getCity() {
-      let res = await fetch(`http://localhost:3000/cities`);
-      let data = await res.json();
-      setCity(data);
-    }
-    getCity();
-  }, []);
+  // const [city, setCity] = useState([]);
+
+  // useEffect(() => {
+  //   async function getCity() {
+  //     let res = await fetch(`http://localhost:3000/cities`);
+  //     let data = await res.json();
+  //     setCities(data);
+  //   }
+  //   getCity();
+  // }, []);
   async function handleRemove(e, id) {
     e.preventDefault();
     const res = await fetch(`http://localhost:3000/cities/${id}`, {
       method: "DELETE",
     });
-    const filterCities = city?.filter((citi) => citi?.id != id);
-    setCity(filterCities);
+    const filterCities = cities?.filter((citi) => citi?.id != id);
+    setCities(filterCities);
   }
 
   return (
     <div className={styles.CityList}>
-      {city?.map((detail) => (
+      {cities?.map((detail) => (
         <CityItem
           key={detail?.id}
           id={detail?.id}
@@ -33,8 +35,6 @@ function CityList() {
           emoji={detail?.emoji}
           date={detail?.date}
           message={detail?.title}
-          currentCity={currentCity}
-          setCurrentCity={setCurrentCity}
           position={detail?.position}
           handleRemove={handleRemove}
         />

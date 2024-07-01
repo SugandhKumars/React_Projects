@@ -1,18 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 import useSearchUrl from "../hooks/useSearchUrl";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { CityContext } from "./App";
 // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=22&longitude=23
 function Form() {
   const Navigate = useNavigate();
+  const { cities, setCities } = useContext(CityContext);
   const [lat, lang] = useSearchUrl();
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [note, setNotes] = useState("");
   const [error, setError] = useState("");
+
   useEffect(() => {
     if (!lang || !lat) return;
     const getCityData = async () => {
@@ -64,7 +67,9 @@ function Form() {
     });
     const data = await res.json();
     console.log(data);
+    setCities([...cities, data]);
   }
+  console.log(cities);
   return (
     <div className={styles.form}>
       <p className={styles.label}>City Name</p>

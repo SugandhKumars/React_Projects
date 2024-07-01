@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CityDetails.module.css";
 function CityDetails() {
   const [city, setCity] = useState([]);
-  const [currentCity, setCurrentCity] = useState({});
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +17,6 @@ function CityDetails() {
   const { id } = useParams();
   let selectedCity = city?.filter((citi) => citi?.id === id);
   console.log(selectedCity);
-  console.log(selectedCity[0]?.name);
 
   return (
     <>
