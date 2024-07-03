@@ -1,0 +1,21 @@
+.Calculator {
+  padding: 10px;
+  margin: 20px 10px;
+}
+.Excercise {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.text {
+  font-size: 18px;
+}
+select {
+  width: 50%;
+  font-size: 14px;
+}
+.Excercise div {
+  width: 50%;
+  display: flex;
+  gap: 10px;
+}

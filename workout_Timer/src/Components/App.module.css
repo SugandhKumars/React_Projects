@@ -1,0 +1,15 @@
+.container {
+  position: relative;
+  width: 600px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #f4f805, #f76c03);
+  padding: 2px;
+}
+
+.content {
+  width: 100%;
+  position: relative;
+  background: white; /* Background color of the content */
+  border-radius: 8px; /* Inner border-radius to match the outer container */
+  padding: 20px; /* Padding for the content */
+}

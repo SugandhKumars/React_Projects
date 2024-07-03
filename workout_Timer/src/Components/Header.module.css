@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  background: linear-gradient(to right, #4555ec, #5ebd4b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.heading {
+  font-size: 60px;
+  font-weight: bolder;
+  font-style: italic;
+}
+.miniHeading {
+  font-size: 18px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+}

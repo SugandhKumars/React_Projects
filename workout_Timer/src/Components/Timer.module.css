@@ -1,0 +1,27 @@
+.timer {
+  background-color: lightgray;
+  margin: 0px 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0px;
+  font-size: 40px;
+  font-weight: bolder;
+  border-radius: 10px;
+}
+.timer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  font-size: 30px;
+  border-radius: 50%;
+  border: none;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    rgb(75, 174, 199),
+    rgb(153, 219, 228)
+  );
+  color: white;
+}
