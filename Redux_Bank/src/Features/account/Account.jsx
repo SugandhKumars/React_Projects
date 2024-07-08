@@ -8,13 +8,15 @@ function Account() {
   const [withraw, setWithraw] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
   const [loanAmountPurpose, setLoanAmountPurpose] = useState("");
-  const balance = useSelector((state) => state.account.Balance);
-  const loan = useSelector((state) => state.account.loan);
+  const [Currency, setCurrency] = useState("INR");
+  const { Balance, loan, loanPurpose } = useSelector((state) => state.account);
+  // const  = useSelector((state) => state.account.loan);
   const dispatch = useDispatch();
-
+  // console.log(Currency);
   function handleDeposit() {
     if (!deposit) return;
-    dispatch(addMoney(deposit));
+    dispatch(addMoney(deposit, Currency));
+
     setDeposit("");
   }
   function handleWithraw() {
@@ -36,7 +38,7 @@ function Account() {
       <Customer />
       <h2>Your Account Operation</h2>
       <div className="balance">
-        <p>₹{balance}.00</p>
+        <p>₹{Balance}</p>
       </div>
       <div className="container">
         <div>
@@ -46,6 +48,15 @@ function Account() {
             value={deposit}
             onChange={(e) => setDeposit(Number(e.target.value))}
           />
+          <label>Currency </label>
+          <select
+            value={Currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+            <option value="EUR">EUR</option>
+          </select>
           <button onClick={handleDeposit}>Deposit</button>
         </div>
         <div>
@@ -74,10 +85,14 @@ function Account() {
 
           <button onClick={handleLoan}>Request Loan</button>
         </div>
-        <div>
-          <label>Pay Back ₹{!loan ? 0 : loan}</label>
-          <button onClick={handlePayLoan}>PAY LOAN</button>
-        </div>
+        {loan > 0 && (
+          <div>
+            <label>
+              Pay Back ₹{loan}({loanPurpose})
+            </label>
+            <button onClick={handlePayLoan}>PAY LOAN</button>
+          </div>
+        )}
       </div>
     </div>
   );
