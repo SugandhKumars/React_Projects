@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+h2,
+h1 {
+  margin: 30px;
+}
+.container {
+  width: 80%;
+  background-color: rgb(240, 232, 232);
+  margin: 10px auto;
+  padding: 20px;
+}
+.container div {
+  margin-bottom: 20px;
+}
+label {
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 12px;
+  margin-left: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: lightgray;
+  cursor: pointer;
+}
+input {
+  outline: none;
+  border: 1px solid gray;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.main {
+  position: relative;
+}
+.balance {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 40px;
+  font-weight: bolder;
+  background-color: rgb(235, 231, 231);
+  padding: 14px 30px;
+}
