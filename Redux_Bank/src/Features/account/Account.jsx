@@ -29,6 +29,7 @@ function Account() {
     dispatch(getLoan(loanAmount, loanAmountPurpose));
     setLoanAmount("");
     setLoanAmountPurpose("");
+    console.log(loan);
   }
   function handlePayLoan() {
     dispatch(payLoan());

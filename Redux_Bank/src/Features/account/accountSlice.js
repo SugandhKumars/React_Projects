@@ -14,6 +14,7 @@ const accountSlice = createSlice({
       state.Balance += action.payload;
     },
     WithrawMoney(state, action) {
+      if (state.Balance < action.payload) return;
       state.Balance -= action.payload;
     },
     getLoan: {
@@ -23,10 +24,11 @@ const accountSlice = createSlice({
       reducer(state, action) {
         state.loan = action.payload.amount;
         state.loanPurpose = action.payload.purpose;
-        state.Balance += state.action.payload.amount;
+        state.Balance += action.payload.amount;
       },
     },
     payLoan(state, action) {
+      if (state.Balance < state.loan) return;
       state.Balance -= state.loan;
       state.loan = 0;
       state.loanPurpose = "";
