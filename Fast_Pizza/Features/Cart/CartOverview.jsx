@@ -11,7 +11,7 @@ function CartOverview() {
   //   console.log(Quantity);
   if (cart.length === 0) return <></>;
   return (
-    <div className="flex justify-between right-28 top-0 z-50 fixed bg-orange-800 text-white font-medium h-16 items-center px-6 mt-2 ">
+    <div className="flex justify-between right-28 top-0 z-50 fixed bg-orange-800 rounded-lg text-white font-medium h-16 items-center px-6 mt-2 ">
       <p>
         <span className="px-4">{totalQuantity} Pizzas</span>
         <span className="px-2">${totalPrice}</span>
