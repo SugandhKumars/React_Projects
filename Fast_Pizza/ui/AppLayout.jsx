@@ -1,18 +1,19 @@
 import React from "react";
 import Header from "./Header";
-import Cart from "../Features/Cart/Cart";
+
 import { Outlet, useNavigation } from "react-router-dom";
+import CartOverview from "../Features/Cart/CartOverview";
 
 function AppLayout() {
   const navigation = useNavigation();
   let loading = navigation.state === "loading";
 
   return (
-    <div>
+    <div className="pt-[0.1px] relative">
       {loading && <p>Loading ...</p>}
       <Header />
       <Outlet />
-      <Cart />
+      <CartOverview className="absolute bottom-0" />
     </div>
   );
 }

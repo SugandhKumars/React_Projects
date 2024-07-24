@@ -1,9 +1,9 @@
-import "./App.css";
+import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cart from "./../Features/Cart/Cart";
 import Menu, { loader as menuLoader } from "./../Features/Menu/Menu";
 import Order from "./../Features/Order/Order";
-import Home from "./../ui/Home";
+import Home from "../ui/Home";
 
 import AppLayout from "../ui/AppLayout";
 import Error from "../ui/Error";
