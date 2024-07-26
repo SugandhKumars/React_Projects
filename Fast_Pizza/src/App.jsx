@@ -7,6 +7,7 @@ import Home from "../ui/Home";
 
 import AppLayout from "../ui/AppLayout";
 import Error from "../ui/Error";
+import CreateOrder from "../Features/Order/CreateOrder";
 function App() {
   const router = createBrowserRouter([
     {
@@ -22,6 +23,7 @@ function App() {
           errorElement: <Error />,
         },
         { path: "/order", element: <Order /> },
+        { path: "/order/new", element: <CreateOrder /> },
       ],
     },
   ]);

@@ -41,9 +41,11 @@ function Cart() {
       )}
       {cart.cart.length > 0 && (
         <div className="mt-5 flex gap-5">
-          <button className="px-3 py-2 font-medium rounded-2xl bg-blue-400 cursor-pointer hover:bg-blue-600 hover:text-zinc-100">
-            Order Pizzas
-          </button>
+          <Link to="/order/new">
+            <button className="px-3 py-2 font-medium rounded-2xl bg-blue-400 cursor-pointer hover:bg-blue-600 hover:text-zinc-100">
+              Order Pizzas
+            </button>
+          </Link>
           <button
             className="px-3 py-2 font-medium rounded-2xl bg-blue-400 cursor-pointer hover:bg-blue-600 hover:text-zinc-100"
             onClick={clear}
